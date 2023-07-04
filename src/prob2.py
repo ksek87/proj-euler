@@ -5,44 +5,39 @@ the first $10$ terms will be:
 By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 find the sum of the even-valued terms
 """
+import itertools as its
 
 
 # logic: compute the fibonacci sequence up to 4 million -- then make a subset of the even numbers to sum
-
-# classic recursive fibonacci (too slow for how large n is in this case)
+# classic recursive fibonacci (too slow for how large n is in this case since recursion is O(2^N))
 def fibonacci(n):
     if n in {0, 1}:
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)
 
 
+# Naive Solution would be to iterate through generating each fib number up to 4 mill while selecting the even
+# Binet's Formula can alos be used to compute
+
+# Naive
 def fib(n):
-    lst = []
-    i = 0
-    x = 0
-    y = 1
-    z = 0
+    a = 1
+    b = 1
+    c = 0
+    even_sum = 0
 
-    while i <= n:
-        lst.append(x)
-        z = x + y
-        x = y
-        y = z
-        i += 1
+    while c < n:
+        if c % 2 == 0:
+            even_sum += c
 
-    return lst
+        a = b
+        b = c
+        c = a + b
 
-
-def even_list(lis):
-    evens = []
-    for i in lis:
-        if i % 2 == 0:
-            evens.append(i)
-
-    return evens
+    return even_sum
 
 
 # bound is 4 million
 computed_to_bound = fib(4000000)  # [fibonacci(n) for n in range(4000000)]
-even_vals = even_list(computed_to_bound)
-print("final answer:", sum(even_vals))
+
+print("final answer:", computed_to_bound)
