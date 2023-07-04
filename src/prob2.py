@@ -17,7 +17,7 @@ def fibonacci(n):
 
 
 # Naive Solution would be to iterate through generating each fib number up to 4 mill while selecting the even
-# Binet's Formula can alos be used to compute
+# Binet's Formula can also be used to compute
 
 # Naive
 def fib(n):
